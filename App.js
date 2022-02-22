@@ -65,7 +65,6 @@ const PhotoListItem = ({ item, onPress }) => {
 const PhotoList = ({ navigation }) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [selectedId, setSelectedId] = useState(null);
 
   const fetchPhotoList = async () => {
     console.log("PhotoListItem: fetchPhotoList...");
@@ -91,7 +90,6 @@ const PhotoList = ({ navigation }) => {
       <PhotoListItem
         item={item}
         onPress={() => {
-          setSelectedId(item.id);
           //alert('Bang!');
           navigation.navigate('Detail', { item: item })
         }}
