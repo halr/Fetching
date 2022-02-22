@@ -38,16 +38,20 @@ const styles = StyleSheet.create({
   },
 });
 
-const PhotoListItem = ({ item, onPress }) => {
-  const shouldComponentUpdate=()=> {
-    console.log("PhotoListItem: shouldComponentUpdate...");
-    return false
-  }
+// React.memo is equivalent to PureComponent, but it only compares props.
+// https://reactjs.org/docs/hooks-faq.html#how-do-i-implement-shouldcomponentupdate
+const PhotoListItem = React.memo(({ item, onPress }) => {
+  //TODO: https://reactjs.org/docs/hooks-faq.html#how-to-memoize-calculations
+  // const shouldComponentUpdate=()=> {
+  //   console.log("PhotoListItem: shouldComponentUpdate...");
+  //   return false
+  // }
+
   // const onLayout=(event)=> {
   //   const {x, y, height, width} = event.nativeEvent.layout;
   //   console.log("PhotoListItem: onLayout: width="+width);
   // }
-  return(
+  return (
     <TouchableHighlight key={item.key} onPress={onPress}>
       {/* <View style={styles.listItem} onLayout={onLayout}> */}
       <View style={styles.listItem}>
@@ -60,7 +64,7 @@ const PhotoListItem = ({ item, onPress }) => {
       </View>
     </TouchableHighlight>
   )
-}
+});
 
 const PhotoList = ({ navigation }) => {
   const [isLoading, setLoading] = useState(true);
