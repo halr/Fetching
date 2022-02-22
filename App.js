@@ -28,6 +28,11 @@ const styles = StyleSheet.create({
     flex: 1,
     aspectRatio: 1
   },
+  centered: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
   photoFull: {
     flex: 1,
   },
@@ -51,9 +56,9 @@ const PhotoListItem = ({ item, onPress }) => {
           //source={{uri: item.download_url}}
           //source={{uri: item.download_url, cache: 'only-if-cached'}}
           source={{uri:`https://picsum.photos/id/${item.id}/200`}}
-          />
-    </View>
-  </TouchableHighlight>
+        />
+      </View>
+    </TouchableHighlight>
   )
 }
 
@@ -62,7 +67,8 @@ const PhotoList = ({ navigation }) => {
   const [data, setData] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
 
-  const getPhotoData = async () => {
+  const fetchPhotoList = async () => {
+    console.log("PhotoListItem: fetchPhotoList...");
     // https://picsum.photos
     try {
       const response = await fetch('https://picsum.photos/v2/list?limit=100');
@@ -75,9 +81,10 @@ const PhotoList = ({ navigation }) => {
    }
   }
 
+  // Lifecycle hook
   useEffect(() => {
-    getPhotoData();
-  }, []);
+    fetchPhotoList();
+  }, []);   // run only once, skipped since emtpy array [] never changes
 
   const renderItem = ({ item }) => {
     return (
