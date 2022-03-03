@@ -21,8 +21,10 @@ const styles = StyleSheet.create({
   },
   listItem: {
     backgroundColor: 'white',
-    width: 200,
-    height: 200,
+    // https://reactnative.dev/docs/dimensions
+    width: 200, // https://reactnative.dev/docs/height-and-width
+    //width: '75%',
+    aspectRatio: 1,
   },
   listPhoto: {
     flex: 1,
